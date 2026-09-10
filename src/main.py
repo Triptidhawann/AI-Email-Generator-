@@ -76,6 +76,16 @@ print("\n========== GENERATING EMAIL... ==========\n")
 
 response = client.responses.create(
     model="openai/gpt-oss-20b",
+    instructions="""
+You are an AI Email Copilot.
+
+Your job is to help users write clear, appropriate, and well-structured emails.
+
+Follow the user's requested purpose, recipient, context, tone, formality, length, and language.
+
+no need to write implementation plan  
+no need to write Anticipated Benefits in tabular way if needed then write in formal way
+""",
     input=prompt
 )
 
