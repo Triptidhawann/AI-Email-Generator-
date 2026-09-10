@@ -87,6 +87,12 @@ The email must:
 - Use the provided context and important points.
 - Follow the requested tone, formality, length, and language.
 - Be clear, professional, and well-structured.
+
+Important factual constraint:
+- Do not invent facts or details.
+- Do not add statistics, dates, names, events, experiences, policies, reasons, or claims that the user did not provide.
+- If information is missing, write the email without inventing it.
+- You may improve wording and sentence structure, but preserve the meaning of the user's information.
 """,
     input=prompt
 )
