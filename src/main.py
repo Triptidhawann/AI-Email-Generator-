@@ -1,6 +1,11 @@
 import os
 from dotenv import load_dotenv
 from openai import OpenAI
+from pydantic import BaseModel
+
+class EmailResponse(BaseModel):
+    subject: str
+    body: str
 
 load_dotenv()
 
@@ -74,9 +79,9 @@ Language:
 
 print("\n========== GENERATING EMAIL... ==========\n")
 
-response = client.responses.create(
+response = client.responses.parse(
     model="openai/gpt-oss-20b",
-instructions = """
+    instructions="""
 You are an AI Email Copilot.
 
 Your task is to write a complete email based on the information provided by the user.
@@ -96,10 +101,15 @@ Important factual constraint:
 
 Output requirements:
 - Provide a subject line.
-- Then provide the complete email.
-- Do not provide explanations, analysis, or commentary outside the email.
+- Provide the complete email body.
+- Do not provide explanations or commentary outside the email.
 """,
-    input=prompt
+    input=prompt,
+    text_format=EmailResponse
 )
 
-print(response.output_text)
+email = response.output_parsed
+
+print("\n--- GENERATED EMAIL ---")
+print("Subject:", email.subject)
+print("\n", email.body)
