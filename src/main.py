@@ -36,44 +36,59 @@ client = OpenAI(
 )
 
 
-# ============================================================
-# COLLECT USER INFORMATION
-# ============================================================
+# -----------------------------
+# Collect user information
+# -----------------------------
 
 print("\n========== AI EMAIL COPILOT ==========\n")
 
-purpose = input(
+
+def get_required_input(question):
+    value = input(question)
+
+    if not value.strip():
+        print("\nError: This field cannot be empty.")
+        exit()
+
+    if len(value) > 3000:
+        print("\nError: Input is too long.")
+        print("Maximum allowed length is 3000 characters.")
+        exit()
+
+    return value
+
+
+purpose = get_required_input(
     "What type of email do you want to write?\n> "
 )
 
-recipient = input(
+recipient = get_required_input(
     "\nWho are you writing to?\n> "
 )
 
-context = input(
+context = get_required_input(
     "\nWhat is the context?\n> "
 )
 
-important_points = input(
+important_points = get_required_input(
     "\nWhat important points should be included?\n> "
 )
 
-tone = input(
+tone = get_required_input(
     "\nWhat tone should the email have?\n> "
 )
 
-formality = input(
+formality = get_required_input(
     "\nHow formal should the email be?\n> "
 )
 
-length = input(
+length = get_required_input(
     "\nHow long should the email be?\n> "
 )
 
-language = input(
+language = get_required_input(
     "\nWhat language should the email be in?\n> "
 )
-
 
 # ============================================================
 # INPUT GUARDRAILS
